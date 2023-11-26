@@ -10,7 +10,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="p-4 border-1 surface-border surface-card border-round">
+  <div class="p-4 border-1 surface-border surface-card border-round h-full flex flex-column justify-content-between">
     <div class="flex flex-wrap align-items-center justify-content-between gap-2">
       <div class="flex align-items-center gap-2">
         <i class="pi pi-tag"></i>
