@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ProductCard from './components/ProductListItem.vue';
+import ProductList from "./components/ProductList.vue";
 </script>
 
 <template>
-  <ProductCard />
+  <ProductList />
 </template>
