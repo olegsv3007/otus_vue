@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProductList from "./components/ProductList.vue";
-import {onBeforeMount, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const products = ref([]);
 const isLoading = ref(true);
@@ -14,7 +14,7 @@ const fetchProducts = async function() {
       .finally(() => setTimeout(() => isLoading.value = false, 1000));
 }
 
-onBeforeMount(async () => await fetchProducts())
+onMounted(async () => await fetchProducts())
 </script>
 
 <template>
