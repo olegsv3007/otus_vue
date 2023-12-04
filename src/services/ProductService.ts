@@ -8,4 +8,10 @@ export class ProductService {
 
         return products;
     }
+
+    async searchProducts(searchQuery: string): Promise<Array<Product>> {
+        return await this.fetchProducts().then(products => {
+            return products.filter((product: Product) => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        })
+    }
 }

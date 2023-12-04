@@ -1,8 +1,7 @@
-<script setup lang="ts">
-import ProductList from "./components/ProductList.vue";
-
-</script>
-
 <template>
-  <ProductList />
+  <Catalog />
 </template>
+
+<script setup lang="ts">
+import Catalog from "./components/Catalog.vue";
+</script>
