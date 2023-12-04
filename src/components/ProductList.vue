@@ -1,22 +1,3 @@
-<script setup lang="ts">
-import ProductListItem from "./ProductListItem.vue";
-import DataView from "primevue/dataview";
-import ProductListItemSkeleton from "./ProductListItemSkeleton.vue";
-import {onMounted, ref} from "vue";
-import {ProductService} from "../services/ProductService.ts";
-
-const productService = new ProductService();
-const products = ref<Array<Product>>([]);
-const isLoading = ref(false);
-
-onMounted(async function () {
-  isLoading.value = true;
-  products.value = await productService.fetchProducts()
-
-  setTimeout(() =>  isLoading.value = false, 1000);
-});
-</script>
-
 <template>
   <DataView v-if="products.length > 0" :value="products" layout="grid">
     <template #grid="slotProps">
@@ -31,3 +12,17 @@ onMounted(async function () {
     </template>
   </DataView>
 </template>
+
+<script setup lang="ts">
+import ProductListItem from "./ProductListItem.vue";
+import DataView from "primevue/dataview";
+import ProductListItemSkeleton from "./ProductListItemSkeleton.vue";
+
+interface Props {
+  products: Array<Product>,
+  isLoading: boolean,
+}
+
+defineProps<Props>();
+
+</script>
