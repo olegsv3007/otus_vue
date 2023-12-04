@@ -1,6 +1,6 @@
 <template>
   <div class="m-5">
-    <SearchLine />
+    <SearchLine :is-loading="isLoading" @search="search"/>
     <ProductList :products="products" :is-loading="isLoading" />
   </div>
 </template>
@@ -21,4 +21,10 @@ onMounted(async function () {
   products.value = await productService.fetchProducts();
   isLoading.value = false;
 });
+
+const search = async (searchQuery: string) => {
+  isLoading.value = true;
+  products.value = await productService.searchProducts(searchQuery)
+  isLoading.value = false;
+}
 </script>
