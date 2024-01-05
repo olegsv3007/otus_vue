@@ -14,4 +14,12 @@ export class ProductService {
             return products.filter((product: Product) => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
         })
     }
+
+    async getPriceRange(searchQuery: string): Promise<number[]> {
+        return await this.searchProducts(searchQuery).then(products => {
+            const prices = products.map(product => product.price);
+
+            return [Math.min(...prices), Math.max(...prices)];
+        })
+    }
 }
