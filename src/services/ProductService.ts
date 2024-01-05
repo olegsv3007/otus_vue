@@ -22,4 +22,10 @@ export class ProductService {
             return [Math.min(...prices), Math.max(...prices)];
         })
     }
+
+    async applyFilter(filter: Filter): Promise<Array<Product>> {
+        return await this.searchProducts(filter.query).then(products => {
+            return products.filter(product => product.price >= filter.price[0] && product.price <= filter.price[1]);
+        });
+    }
 }
