@@ -1,7 +1,7 @@
 <template>
   <div class="m-5 grid">
     <SearchLine :is-loading="isLoading" @search="search" class="col-12"/>
-    <Filters :filter="filter" :price-range="priceRange" class="col-3 mt-2" @update="updateFilter"/>
+    <Filters :filter="filter" :price-range="priceRange" class="col-3 mt-2" @update="updateFilter" @clear="clearFilter"/>
     <ProductList :products="products" :is-loading="isLoading" class="col-9"/>
   </div>
 </template>
@@ -39,6 +39,11 @@ const search = async (searchQuery: string) => {
   filter.value.query = searchQuery;
   priceRange.value = await productService.getPriceRange(searchQuery)
   filter.value.price = priceRange.value;
+}
+
+const clearFilter = async () => {
+  filter.value.price = priceRange.value;
+  products.value = await productService.applyFilter(filter.value);
 }
 
 const updateFilter = async (key: string, value: any) => {

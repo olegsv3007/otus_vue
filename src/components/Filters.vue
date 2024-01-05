@@ -1,7 +1,7 @@
 <template>
   <Panel header="Filters">
     <template #icons>
-      <button class="p-panel-header-icon p-link mr-2" @click="">
+      <button class="p-panel-header-icon p-link mr-2" @click="$emit('clear')">
         <span class="pi pi-filter-slash"></span>
       </button>
     </template>
@@ -25,7 +25,7 @@ interface Props {
 }
 
 defineProps<Props>();
-defineEmits(['update']);
+defineEmits(['update', 'clear']);
 </script>
 
 <style scoped>
