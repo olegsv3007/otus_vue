@@ -1,7 +1,8 @@
 <template>
-  <div class="m-5">
-    <SearchLine :is-loading="isLoading" @search="search"/>
-    <ProductList :products="products" :is-loading="isLoading" />
+  <div class="m-5 grid">
+    <SearchLine :is-loading="isLoading" @search="search" class="col-12"/>
+    <Filters class="col-3 mt-2"/>
+    <ProductList :products="products" :is-loading="isLoading" class="col-9"/>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import SearchLine from "./SearchLine.vue";
 
 import {onMounted, ref} from "vue";
 import {ProductService} from "../services/ProductService.ts";
+import Filters from "./Filters.vue";
 
 const productService = new ProductService();
 const products = ref<Array<Product>>([]);
