@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import Panel from "primevue/panel";
-import RangeSlider from "./RangeSlider.vue";
+import RangeSlider from "../../common/RangeSlider.vue";
 
 interface Props {
   filter: Filter,

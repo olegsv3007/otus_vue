@@ -11,7 +11,7 @@ import ProductList from "./ProductList.vue";
 import SearchLine from "./SearchLine.vue";
 
 import {onMounted, ref} from "vue";
-import {ProductService} from "../services/ProductService.ts";
+import {ProductService} from "../../../services/ProductService.ts";
 import Filters from "./Filters.vue";
 
 const productService = new ProductService();
