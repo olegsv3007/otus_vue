@@ -3,16 +3,22 @@
     <SearchLine :is-loading="isLoading" @search="search" class="col-12"/>
     <Filters :filter="filter" :price-range="priceRange" class="col-3 mt-2" @update="updateFilter" @clear="clearFilter"/>
     <ProductList :products="products" :is-loading="isLoading" class="col-9"/>
+    <FormModalComponent header="Create Product" url="/store" form="../Product/Form/CreateProductForm.vue">
+      <template #modal-initiator="{ showModal }">
+        <Button class="create_product_button fixed left-0 bottom-0 m-5" icon="pi pi-plus" rounded @click="showModal"/>
+      </template>
+    </FormModalComponent>
   </div>
 </template>
 
 <script setup lang="ts">
 import ProductList from "./ProductList.vue";
 import SearchLine from "./SearchLine.vue";
-
+import Button from "primevue/button";
 import {onMounted, ref} from "vue";
-import {ProductService} from "../services/ProductService.ts";
+import {ProductService} from "../../../services/ProductService.ts";
 import Filters from "./Filters.vue";
+import FormModalComponent from "../../common/FormModalComponent.vue";
 
 const productService = new ProductService();
 const products = ref<Array<Product>>([]);
