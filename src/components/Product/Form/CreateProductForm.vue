@@ -1,9 +1,9 @@
 <template>
   <Form>
-    <InputText label="Title" :value="formData.title" @update="(value: string) => formData.title = value"/>
-    <InputCurrency class="mt-2" label="Price" :value="formData.price" @update="(value: number) => formData.price = value"/>
-    <Editor class="mt-2" label="Description" :value="formData.description" @update="(value: string) => formData.description = value"/>
-    <Dropdown class="mt-2" label="Select a category" :value="formData.category" :options="categories" @update="(value: string) => formData.category = value"/>
+    <InputText label="Title" v-model:value="formData.title"/>
+    <InputCurrency class="mt-2" label="Price" v-model:value="formData.price"/>
+    <Editor class="mt-2" label="Description" v-model:value="formData.description"/>
+    <Dropdown class="mt-2" label="Select a category" v-model:value="formData.category" :options="categories"/>
     <FileUpload class="mt-2" label="Photo" @update="(value: string) => formData.image = value"/>
   </Form>
 </template>

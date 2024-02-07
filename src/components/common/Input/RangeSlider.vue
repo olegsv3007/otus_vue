@@ -6,7 +6,7 @@
   </div>
   <Slider
       :model-value="value"
-      @update:model-value="(modelValue: number[])=> $emit('update', modelValue)"
+      @update:model-value="(modelValue: number[])=> $emit('update:value', modelValue)"
       range
       :min="min"
       :max="max"
@@ -25,11 +25,5 @@ interface Props {
 }
 
 defineProps<Props>();
-
-defineEmits(['update']);
-
+defineEmits(['update:value']);
 </script>
-
-<style scoped>
-
-</style>

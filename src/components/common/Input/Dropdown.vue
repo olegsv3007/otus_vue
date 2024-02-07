@@ -7,7 +7,7 @@
         :options="options"
         class="w-full"
         :placeholder="placeholder"
-        @update:model-value="(modelValue: string): void => emit('update', modelValue)"
+        @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
     />
   </div>
 </template>
@@ -23,5 +23,5 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits(['update']);
+const emit = defineEmits(['update:value']);
 </script>
