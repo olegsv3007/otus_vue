@@ -1,25 +1,24 @@
 <template>
   <div class="flex flex-column gap-1 w-full">
     <label :for="label">{{ label }}</label>
-    <Dropdown
-        :input-id="label"
+    <InputMask
+        :id="label"
         :model-value="value"
-        :options="options"
-        class="w-full"
         :placeholder="placeholder"
         @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
+        :mask="mask"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import Dropdown from "primevue/dropdown";
+import InputMask from "primevue/inputmask";
 
 interface Props {
   label: string,
   value: string,
-  options: Array<string>,
   placeholder?: string,
+  mask: string,
 }
 
 defineProps<Props>();

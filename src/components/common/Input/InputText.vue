@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-column gap-2 w-full">
+  <div class="flex flex-column gap-1 w-full">
     <label :for="label">{{ label }}</label>
     <InputText
         :id="label"

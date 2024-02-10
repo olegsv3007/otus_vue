@@ -1,11 +1,10 @@
 <template>
   <div class="flex flex-column gap-1 w-full">
     <label :for="label">{{ label }}</label>
-    <Dropdown
+    <Calendar
         :input-id="label"
         :model-value="value"
-        :options="options"
-        class="w-full"
+        showIcon
         :placeholder="placeholder"
         @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
     />
@@ -13,12 +12,11 @@
 </template>
 
 <script setup lang="ts">
-import Dropdown from "primevue/dropdown";
+import Calendar from "primevue/calendar";
 
 interface Props {
   label: string,
-  value: string,
-  options: Array<string>,
+  value: Date,
   placeholder?: string,
 }
 
