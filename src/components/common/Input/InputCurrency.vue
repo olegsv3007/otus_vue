@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-column gap-2 w-full">
+  <div class="flex flex-column gap-1 w-full">
     <label :for="label">{{ label }}</label>
     <InputNumber
         :model-value="value"
         :placeholder="placeholder"
-        @update:model-value="(modelValue?: number): void => emit('update', modelValue)"
+        @update:model-value="(modelValue?: number): void => emit('update:value', modelValue)"
         mode="currency"
         :inputId="label"
         currency="USD"
@@ -23,5 +23,5 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits(['update']);
+const emit = defineEmits(['update:value']);
 </script>

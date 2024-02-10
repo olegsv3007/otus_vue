@@ -1,23 +1,21 @@
 <template>
-  <div class="flex flex-column gap-1 w-full">
-    <label :for="label">{{ label }}</label>
-    <Editor
-        :id="label"
+  <div class="flex align-items-center">
+    <Checkbox
+        :inputId="label"
         :model-value="value"
-        :placeholder="placeholder"
         @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
-        editorStyle="height: 160px"
+        binary
     />
+    <label :for="label" class="ml-2">{{ label }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
-import Editor from "primevue/editor";
+import Checkbox from 'primevue/checkbox';
 
 interface Props {
   label: string,
-  value: string,
-  placeholder?: string,
+  value: boolean,
 }
 
 defineProps<Props>();

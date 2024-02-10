@@ -9,15 +9,15 @@
         title="Price"
         :min="priceRange[0]"
         :max="priceRange[1]"
-        v-model:value="filter.price"
-        @update="(value: number[]) => $emit('update', 'price', value)"
+        :value="filter.price"
+        @update:value="(value: number[]) => $emit('update', 'price', value)"
     />
   </Panel>
 </template>
 
 <script setup lang="ts">
 import Panel from "primevue/panel";
-import RangeSlider from "../../common/RangeSlider.vue";
+import RangeSlider from "../../common/Input/RangeSlider.vue";
 
 interface Props {
   filter: Filter,
