@@ -16,7 +16,7 @@ import InputMask from "primevue/inputmask";
 
 interface Props {
   label: string,
-  value: string,
+  value: string|number,
   placeholder?: string,
   mask: string,
 }
