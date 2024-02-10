@@ -2,7 +2,7 @@
   <InputText label="Title" v-model:value="formData.title" :error="errors?.title"/>
   <InputCurrency class="mt-2" label="Price" v-model:value="formData.price" :error="errors?.price"/>
   <Editor class="mt-2" label="Description" v-model:value="formData.description" :error="errors?.description"/>
-  <Dropdown class="mt-2" label="Select a category" v-model:value="formData.category" :options="categories" :error="errors?.category"/>
+  <CategorySelect class="mt-2" label="Select a category" v-model:value="formData.category" :error="errors?.category"/>
   <FileUpload class="mt-2" label="Photo" @update="(value: string) => formData.image = value" :error="errors?.image"/>
 </template>
 
@@ -10,11 +10,11 @@
 import InputText from "../../common/Input/InputText.vue";
 import InputCurrency from "../../common/Input/InputCurrency.vue";
 import Editor from "../../common/Input/Editor.vue";
-import Dropdown from '../../common/Input/Dropdown.vue';
 import FileUpload from "../../common/Input/FileUpload.vue";
 import {ref, Ref} from "vue";
 import {RawFormSchema, validateObject} from "vee-validate";
 import * as yup from "yup";
+import CategorySelect from "../../common/ModelInput/CategorySelect.vue";
 
 const formData: Ref<Product> = ref<Product>({
   title: '',
@@ -27,13 +27,6 @@ const formData: Ref<Product> = ref<Product>({
     count: 0,
   },
 });
-
-const categories: Array<string> = [
-  'men\'s clothing',
-  'women\'s clothes',
-  'jewelery',
-  'electronics',
-];
 
 const validationSchema: RawFormSchema<Product> = {
   id: '',
