@@ -1,11 +1,9 @@
 <template>
-  <Form>
-    <InputText label="Title" v-model:value="formData.title"/>
-    <InputCurrency class="mt-2" label="Price" v-model:value="formData.price"/>
-    <Editor class="mt-2" label="Description" v-model:value="formData.description"/>
-    <Dropdown class="mt-2" label="Select a category" v-model:value="formData.category" :options="categories"/>
-    <FileUpload class="mt-2" label="Photo" @update="(value: string) => formData.image = value"/>
-  </Form>
+  <InputText label="Title" v-model:value="formData.title" :error="errors?.title"/>
+  <InputCurrency class="mt-2" label="Price" v-model:value="formData.price" :error="errors?.price"/>
+  <Editor class="mt-2" label="Description" v-model:value="formData.description" :error="errors?.description"/>
+  <Dropdown class="mt-2" label="Select a category" v-model:value="formData.category" :options="categories" :error="errors?.category"/>
+  <FileUpload class="mt-2" label="Photo" @update="(value: string) => formData.image = value" :error="errors?.image"/>
 </template>
 
 <script setup lang="ts">
@@ -15,7 +13,8 @@ import Editor from "../../common/Input/Editor.vue";
 import Dropdown from '../../common/Input/Dropdown.vue';
 import FileUpload from "../../common/Input/FileUpload.vue";
 import {ref, Ref} from "vue";
-import {Form} from "vee-validate";
+import {RawFormSchema, validateObject} from "vee-validate";
+import * as yup from "yup";
 
 const formData: Ref<Product> = ref<Product>({
   title: '',
@@ -36,9 +35,30 @@ const categories: Array<string> = [
   'electronics',
 ];
 
+const validationSchema: RawFormSchema<Product> = {
+  id: '',
+  title: yup.string().required(),
+  price: yup.number().min(0.01).required(),
+  description: yup.string().required(),
+  category: yup.string().required(),
+  image: yup.string().url().required(),
+  rating: '',
+  'rating.rate': '',
+  'rating.count': '',
+}
+
+const errors: Ref<Partial<Record<string, string>>> = ref({});
+
 const submit = (): void => {
-  console.log(formData.value);
+  validateObject(validationSchema, formData.value).then((result) => {
+    if (result.valid) {
+      emit('closeModal');
+    }
+
+    errors.value = result.errors;
+  });
 }
 
 defineExpose({ submit });
+const emit = defineEmits(['closeModal']);
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Dialog v-model:visible="visible" :header="header" modal :style="{width: '50rem'}" :breakpoints="{'1199px': '75vw', '575px': '90vw'}">
-      <component ref="formRef" :is="FormComponent" v-bind="formProps"/>
+      <component ref="formRef" :is="FormComponent" v-bind="formProps" @closeModal="closeModal"/>
       <template #footer>
         <Button label="Cancel" @click="closeModal" severity="secondary"/>
         <Button label="Submit" @click="submit"/>
@@ -40,6 +40,5 @@ const closeModal = (): void => {
 
 const submit = (): void => {
   formRef?.value?.submit();
-  closeModal();
 };
 </script>

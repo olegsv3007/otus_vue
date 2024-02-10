@@ -74,7 +74,3 @@ const submit = (): void => {
 
 defineExpose({ submit });
 </script>
-
-<style scoped>
-
-</style>

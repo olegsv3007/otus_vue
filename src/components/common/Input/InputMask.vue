@@ -7,7 +7,9 @@
         :placeholder="placeholder"
         @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
         :mask="mask"
+        :class="error ? 'p-invalid' : ''"
     />
+    <span class="text-xs p-error">{{ error }}</span>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ interface Props {
   value: string|number,
   placeholder?: string,
   mask: string,
+  error?: string,
 }
 
 defineProps<Props>();

@@ -9,7 +9,9 @@
         :inputId="label"
         currency="USD"
         locale="en-US"
+        :class="error ? 'p-invalid' : ''"
     />
+    <span class="text-xs p-error">{{ error }}</span>
   </div>
 </template>
 
@@ -20,6 +22,7 @@ interface Props {
   label: string,
   value: number,
   placeholder?: string,
+  error?: string,
 }
 
 defineProps<Props>();
