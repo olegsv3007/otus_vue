@@ -21,7 +21,6 @@ const FormComponent = defineAsyncComponent(() => import( /* @vite-ignore */ prop
 interface Props {
   header: string,
   method?: string,
-  url: string,
   form: string,
   formProps?: object,
 }
@@ -34,12 +33,13 @@ let formRef: Ref<null | InstanceType<typeof Element>> = ref(null);
 const showModal = (): void => {
   visible.value = true;
 };
+
 const closeModal = (): void => {
   visible.value = false;
 };
+
 const submit = (): void => {
-  //@todo send form to server
-  console.log(formRef.value?.formData ?? null);
+  formRef?.value?.submit();
   closeModal();
 };
 </script>

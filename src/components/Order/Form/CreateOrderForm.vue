@@ -68,7 +68,11 @@ const formData: Ref<Order> = ref<Order>({
   },
 });
 
-defineExpose({formData});
+const submit = (): void => {
+  console.log(formData.value);
+}
+
+defineExpose({ submit });
 </script>
 
 <style scoped>

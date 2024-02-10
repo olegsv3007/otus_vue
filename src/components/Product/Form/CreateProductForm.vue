@@ -36,5 +36,9 @@ const categories: Array<string> = [
   'electronics',
 ];
 
-defineExpose({ formData });
+const submit = (): void => {
+  console.log(formData.value);
+}
+
+defineExpose({ submit });
 </script>
