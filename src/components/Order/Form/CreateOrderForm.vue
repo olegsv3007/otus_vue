@@ -3,6 +3,7 @@
     <div class="flex flex-wrap">
       <div class="flex-column col-12 lg:col-6">
         <InputText label="Name" v-model:value="formData.fullName" />
+        <InputText class="mt-2" label="Email" v-model:value="formData.email" />
         <DatePicker class="mt-2" label="Birthdate" v-model:value="formData.birthDate" />
         <CountrySelect class="mt-2" v-model:value="formData.country" />
         <InputText class="mt-2" label="Address" v-model:value="formData.address" />
@@ -55,6 +56,7 @@ defineProps<Props>();
 
 const formData: Ref<Order> = ref<Order>({
   fullName: '',
+  email: '',
   birthDate: new Date(),
   country: '',
   address: '',
