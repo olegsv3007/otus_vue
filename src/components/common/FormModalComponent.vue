@@ -1,7 +1,7 @@
 <template>
   <div>
     <Dialog v-model:visible="visible" :header="header" modal :style="{width: '50rem'}" :breakpoints="{'1199px': '75vw', '575px': '90vw'}">
-      <component ref="formRef" :is="FormComponent" v-bind="formProps"/>
+      <component ref="formRef" :is="FormComponent" v-bind="formProps" @closeModal="closeModal"/>
       <template #footer>
         <Button label="Cancel" @click="closeModal" severity="secondary"/>
         <Button label="Submit" @click="submit"/>
@@ -21,7 +21,6 @@ const FormComponent = defineAsyncComponent(() => import( /* @vite-ignore */ prop
 interface Props {
   header: string,
   method?: string,
-  url: string,
   form: string,
   formProps?: object,
 }
@@ -34,12 +33,12 @@ let formRef: Ref<null | InstanceType<typeof Element>> = ref(null);
 const showModal = (): void => {
   visible.value = true;
 };
+
 const closeModal = (): void => {
   visible.value = false;
 };
+
 const submit = (): void => {
-  //@todo send form to server
-  console.log(formRef.value?.formData ?? null);
-  closeModal();
+  formRef?.value?.submit();
 };
 </script>

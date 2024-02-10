@@ -3,13 +3,14 @@
     <label :for="label">{{ label }}</label>
     <FileUpload
         mode="basic"
-        name="image"
         accept="image/*"
         :maxFileSize="1000000"
         @select="onFileSelect"
         @remove="onFileRemove"
+        @clear="onFileRemove"
         chooseLabel="Browse"
     />
+    <span class="text-xs p-error">{{ error }}</span>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import FileUpload, {FileUploadSelectEvent} from "primevue/fileupload";
 
 interface Props {
   label: string,
+  error?: string,
   placeholder?: string,
 }
 
@@ -25,7 +27,7 @@ defineProps<Props>();
 const emit = defineEmits(['update']);
 
 const onFileSelect = (event: FileUploadSelectEvent): void => {
-  //@todo uploadFile;
+  //@todo uploadFile and return url
   emit('update', event.files[0]?.objectURL);
 }
 

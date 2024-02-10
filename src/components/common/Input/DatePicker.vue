@@ -7,7 +7,9 @@
         showIcon
         :placeholder="placeholder"
         @update:model-value="(modelValue: string): void => emit('update:value', modelValue)"
+        :class="error ? 'p-invalid' : ''"
     />
+    <span class="text-xs p-error">{{ error }}</span>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ interface Props {
   label: string,
   value: Date,
   placeholder?: string,
+  error?: string,
 }
 
 defineProps<Props>();

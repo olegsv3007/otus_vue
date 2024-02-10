@@ -1,5 +1,6 @@
 interface Order {
     fullName: string,
+    email: string,
     birthDate: Date,
     country: string,
     address: string,
