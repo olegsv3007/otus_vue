@@ -87,7 +87,7 @@ const errors: Ref<Partial<Record<string, string>>> = ref({});
 const submit = (): void => {
   validateObject(validationSchema, formData.value).then((result) => {
     if (result.valid) {
-      emit('closeModal');
+      emit('submitted');
     }
 
     errors.value = result.errors;
@@ -95,5 +95,5 @@ const submit = (): void => {
 }
 
 defineExpose({ submit });
-const emit = defineEmits(['closeModal']);
+const emit = defineEmits(['submitted']);
 </script>

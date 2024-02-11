@@ -34,7 +34,7 @@ const validationSchema: RawFormSchema<Product> = {
   price: yup.number().min(0.01).required(),
   description: yup.string().required(),
   category: yup.string().required(),
-  image: yup.string().url().required(),
+  image: yup.string().required(),
   rating: '',
   'rating.rate': '',
   'rating.count': '',
@@ -44,8 +44,9 @@ const errors: Ref<Partial<Record<string, string>>> = ref({});
 
 const submit = (): void => {
   validateObject(validationSchema, formData.value).then((result) => {
+    console.log('submitted');
     if (result.valid) {
-      emit('closeModal');
+      emit('submitted');
     }
 
     errors.value = result.errors;
@@ -53,5 +54,5 @@ const submit = (): void => {
 }
 
 defineExpose({ submit });
-const emit = defineEmits(['closeModal']);
+const emit = defineEmits(['submitted']);
 </script>
