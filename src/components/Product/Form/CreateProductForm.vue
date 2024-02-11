@@ -15,6 +15,7 @@ import {ref, Ref} from "vue";
 import {RawFormSchema, validateObject} from "vee-validate";
 import * as yup from "yup";
 import CategorySelect from "../../common/ModelInput/CategorySelect.vue";
+import {ProductService} from "../../../services/ProductService.ts";
 
 const formData: Ref<Product> = ref<Product>({
   title: '',
@@ -41,12 +42,14 @@ const validationSchema: RawFormSchema<Product> = {
 }
 
 const errors: Ref<Partial<Record<string, string>>> = ref({});
+const productService = new ProductService();
 
-const submit = (): void => {
-  validateObject(validationSchema, formData.value).then((result) => {
-    console.log('submitted');
+const submit = async () => {
+  await validateObject(validationSchema, formData.value).then(async result => {
     if (result.valid) {
-      emit('submitted');
+      if (await productService.storeProduct(formData.value) === 200) {
+        emit('submitted');
+      }
     }
 
     errors.value = result.errors;

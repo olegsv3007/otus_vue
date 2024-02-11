@@ -29,4 +29,9 @@ export class ProductService {
             return products.filter(product => product.price >= filter.price[0] && product.price <= filter.price[1]);
         });
     }
+
+    async storeProduct(product: Product) {
+        return await axios.post('https://httpbin.org/post', product)
+            .then(response => response.status);
+    }
 }
