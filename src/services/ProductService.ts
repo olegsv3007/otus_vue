@@ -1,10 +1,11 @@
+import axios from "axios";
+
 export class ProductService {
     async fetchProducts(): Promise<Array<Product>> {
         let products: Array<Product> = [];
 
-        await fetch('https://fakestoreapi.com/products')
-            .then((response) => response.json())
-            .then((json) => products = json)
+        await axios.get('https://fakestoreapi.com/products')
+            .then((response) => products = response.data)
 
         return products;
     }
@@ -27,5 +28,10 @@ export class ProductService {
         return await this.searchProducts(filter.query).then(products => {
             return products.filter(product => product.price >= filter.price[0] && product.price <= filter.price[1]);
         });
+    }
+
+    async storeProduct(product: Product) {
+        return await axios.post('https://httpbin.org/post', product)
+            .then(response => response.status);
     }
 }

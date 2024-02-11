@@ -48,6 +48,7 @@ import Divider from 'primevue/divider';
 import InputMask from "../../common/Input/InputMask.vue";
 import Card from "primevue/card";
 import * as yup from "yup";
+import {OrderService} from "../../../services/OrderService.ts";
 
 interface Props {
     product: Product,
@@ -83,11 +84,14 @@ const validationSchema: RawFormSchema<Order> = {
 }
 
 const errors: Ref<Partial<Record<string, string>>> = ref({});
+const orderService = new OrderService();
 
-const submit = (): void => {
-  validateObject(validationSchema, formData.value).then((result) => {
+const submit = async () => {
+  await validateObject(validationSchema, formData.value).then(async result => {
     if (result.valid) {
-      emit('closeModal');
+      if (await orderService.storeOrder(formData.value) === 200) {
+        emit('submitted');
+      }
     }
 
     errors.value = result.errors;
@@ -95,5 +99,5 @@ const submit = (): void => {
 }
 
 defineExpose({ submit });
-const emit = defineEmits(['closeModal']);
+const emit = defineEmits(['submitted']);
 </script>
