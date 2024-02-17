@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Rating from "primevue/rating";
 import Button from "primevue/button";
+import FormModalComponent from "../../common/FormModalComponent.vue";
 
 interface Props {
   product: Product,
@@ -24,7 +25,11 @@ defineProps<Props>();
     </div>
     <div class="flex align-items-center justify-content-between">
       <span class="text-2xl font-semibold">${{ product.price }}</span>
-      <Button icon="pi pi-shopping-cart" rounded></Button>
+      <FormModalComponent form="../Order/Form/CreateOrderForm.vue" header="Create Order" :form-props="{product: product}" success-message="Order has been created">
+        <template #modal-initiator="{ showModal }">
+          <Button icon="pi pi-shopping-cart" rounded @click="showModal"></Button>
+        </template>
+      </FormModalComponent>
     </div>
   </div>
 </template>
