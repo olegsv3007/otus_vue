@@ -1,27 +1,10 @@
 <template>
-  <Menubar :model="menuItems">
-    <template #item="{ item, props }">
-      <router-link v-slot="{ href, navigate }" :to="{name: item.route}" custom>
-        <a :href="href" v-bind="props.action" @click="navigate">
-          <span :class="item.icon" />
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      </router-link>
-    </template>
-  </Menubar>
+  <NavMenu />
   <router-view></router-view>
   <Toast />
 </template>
 
 <script setup lang="ts">
-import Menubar from "primevue/menubar";
 import Toast from "primevue/toast";
-
-const menuItems = [
-  {
-    label: 'Home',
-    icon: 'pi pi-home',
-    route: 'home',
-  },
-];
+import NavMenu from "./components/common/Nav/NavMenu.vue";
 </script>
