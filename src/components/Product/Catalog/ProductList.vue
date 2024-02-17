@@ -6,7 +6,9 @@
           <product-list-item-skeleton />
         </div>
         <div v-else v-for="(product, index) in slotProps.items" :key="index" class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
-          <product-list-item :product="product"/>
+          <router-link v-slot="{ navigate }" :to="{name: 'product', params: {productId: product.id}}" custom>
+            <product-list-item :product="product" @click="navigate"/>
+          </router-link>
         </div>
       </div>
     </template>

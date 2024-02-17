@@ -5,7 +5,7 @@ export class ProductService {
         let products: Array<Product> = [];
 
         await axios.get('https://fakestoreapi.com/products')
-            .then((response) => products = response.data)
+            .then((response) => products = response.data);
 
         return products;
     }
@@ -34,8 +34,13 @@ export class ProductService {
         });
     }
 
-    async storeProduct(product: Product) {
+    async storeProduct(product: Product): Promise<number> {
         return await axios.post('https://httpbin.org/post', product)
             .then(response => response.status);
+    }
+
+    async getProductById(productId: string): Promise<Product> {
+        return await axios.get(`https://fakestoreapi.com/products/${productId}`)
+            .then((response) => response.data);
     }
 }

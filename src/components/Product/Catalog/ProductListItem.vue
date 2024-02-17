@@ -27,7 +27,7 @@ defineProps<Props>();
       <span class="text-2xl font-semibold">${{ product.price }}</span>
       <FormModalComponent form="../Order/Form/CreateOrderForm.vue" header="Create Order" :form-props="{product: product}" success-message="Order has been created">
         <template #modal-initiator="{ showModal }">
-          <Button icon="pi pi-shopping-cart" rounded @click="showModal"></Button>
+          <Button icon="pi pi-shopping-cart" rounded @click.stop="showModal"></Button>
         </template>
       </FormModalComponent>
     </div>

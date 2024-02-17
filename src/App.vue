@@ -22,6 +22,6 @@ const menuItems = [
     label: 'Home',
     icon: 'pi pi-home',
     route: 'home',
-  }
+  },
 ];
 </script>
