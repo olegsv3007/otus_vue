@@ -8,3 +8,14 @@
 import Toast from "primevue/toast";
 import NavMenu from "./components/common/Nav/NavMenu.vue";
 </script>
+
+<style>
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+#app {
+  min-height: 100vh;
+}
+</style>
