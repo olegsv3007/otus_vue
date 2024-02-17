@@ -20,7 +20,11 @@ export class ProductService {
         return await this.searchProducts(searchQuery).then(products => {
             const prices = products.map(product => product.price);
 
-            return [Math.min(...prices), Math.max(...prices)];
+            if (!prices.length) {
+                return [0, 0];
+            }
+
+            return [Math.min(...prices ?? 0), Math.max(...prices ?? 0)];
         })
     }
 

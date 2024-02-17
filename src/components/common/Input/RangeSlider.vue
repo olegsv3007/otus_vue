@@ -12,6 +12,7 @@
       :min="min"
       :max="max"
       aria-label="range_label"
+      :disabled="max === min"
   />
 </template>
 
