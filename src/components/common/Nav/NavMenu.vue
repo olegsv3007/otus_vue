@@ -8,11 +8,31 @@
         </a>
       </router-link>
     </template>
+    <template #end>
+      <router-link v-if="!currentUser" v-slot="{ navigate }" :to="{name: 'login'}" custom>
+        <Button @click="navigate" class="p-button p-button-sm" label="Login" icon="pi pi-sign-in"/>
+      </router-link>
+      <div class="flex align-items-center">
+        <Button class="p-button p-button-sm text-xs" v-if="currentUser" @click="logout" icon="pi pi-sign-out" :label="`Logout (${currentUser})`"/>
+      </div>
+    </template>
   </Menubar>
 </template>
 
 <script setup lang="ts">
 import Menubar from "primevue/menubar";
+import {LoginService} from "../../../services/LoginService.ts";
+import {onMounted, Ref, ref} from "vue";
+import {useRouter} from "vue-router";
+import Button from "primevue/button";
+
+const loginService = new LoginService();
+const currentUser: Ref<string|null> = ref<string|null>(null);
+const router = useRouter();
+
+onMounted(() => {
+  currentUser.value = loginService.getAuthenticatedUser();
+});
 
 const menuItems = [
   {
@@ -20,10 +40,16 @@ const menuItems = [
     icon: 'pi pi-home',
     route: 'home',
   },
-  {
-    label: 'Login',
-    icon: 'pi pi-sign-in',
-    route: 'login',
-  },
 ];
+
+router.afterEach((to, from, failure): void => {
+  if (from.name === 'login') {
+    currentUser.value = loginService.getAuthenticatedUser();
+  }
+})
+
+const logout = () => {
+  loginService.logout();
+  currentUser.value = null;
+}
 </script>
