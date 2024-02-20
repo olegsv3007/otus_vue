@@ -9,11 +9,16 @@
       </router-link>
     </template>
     <template #end>
-      <router-link v-if="!currentUser" v-slot="{ navigate }" :to="{name: 'login'}" custom>
-        <Button @click="navigate" class="p-button p-button-sm" label="Login" icon="pi pi-sign-in"/>
-      </router-link>
-      <div class="flex align-items-center">
-        <Button class="p-button p-button-sm text-xs" v-if="currentUser" @click="logout" icon="pi pi-sign-out" :label="`Logout (${currentUser})`"/>
+      <div class="flex">
+        <router-link v-slot="{ navigate }" :to="{name: 'cart'}" custom>
+          <Button @click="navigate" class="p-button p-button-sm text-xs" icon="pi pi-shopping-cart" rounded aria-label="Filter" badge="2"/>
+        </router-link>
+        <router-link v-if="!currentUser" v-slot="{ navigate }" :to="{name: 'login'}" custom>
+          <Button @click="navigate" class="p-button p-button-sm ml-2" label="Login" icon="pi pi-sign-in"/>
+        </router-link>
+        <div class="flex align-items-center">
+          <Button class="p-button p-button-sm text-xs ml-2" v-if="currentUser" @click="logout" icon="pi pi-sign-out" :label="`Logout (${currentUser})`"/>
+        </div>
       </div>
     </template>
   </Menubar>
