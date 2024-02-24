@@ -1,5 +1,9 @@
+import {inject} from "vue";
+import {Emitter} from "mitt";
+
 export class CartService {
     private emptyCart: Cart = {lines: []};
+    private emitter: Emitter<Events> = inject('emitter') as Emitter<Events>;
 
     getCart(): Cart {
         const cart = localStorage.getItem('cart');
@@ -18,10 +22,12 @@ export class CartService {
         cartLine.quantity++;
 
         localStorage.setItem('cart', JSON.stringify(cart));
+        this.emitter.emit('cartLinesQuantityChanged', this.getTotalQuantity());
     }
 
     clear(): void {
         localStorage.setItem('cart', JSON.stringify(this.emptyCart));
+        this.emitter.emit('cartLinesQuantityChanged', 0);
     }
 
     deleteLine(product: Product): void {
@@ -34,6 +40,7 @@ export class CartService {
 
         cart.lines.splice(cart.lines.indexOf(cartLine), 1);
         localStorage.setItem('cart', JSON.stringify(cart));
+        this.emitter.emit('cartLinesQuantityChanged', this.getTotalQuantity());
     }
 
     deleteItem(product: Product): void {
@@ -52,9 +59,10 @@ export class CartService {
 
         cartLine.quantity--;
         localStorage.setItem('cart', JSON.stringify(cart));
+        this.emitter.emit('cartLinesQuantityChanged', this.getTotalQuantity());
     }
 
-    getNumberOfLines(): number {
-        return this.getCart().lines.length;
+    getTotalQuantity(): number {
+        return this.getCart().lines.reduce((acc: number, line: CartLine) => acc + line.quantity, 0);
     }
 }

@@ -1,0 +1,3 @@
+type Events = {
+    cartLinesQuantityChanged: number,
+}

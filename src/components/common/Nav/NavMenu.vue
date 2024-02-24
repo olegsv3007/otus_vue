@@ -1,5 +1,5 @@
 <template>
-  <Menubar :model="menuItems" class="h-4rem">
+  <Menubar :model="menuItems" class="h-4rem nav">
     <template #item="{ item, props }">
       <router-link v-slot="{ href, navigate }" :to="{name: item.route}" custom>
         <a :href="href" v-bind="props.action" @click="navigate">
@@ -57,3 +57,13 @@ const logout = () => {
   currentUser.value = null;
 }
 </script>
+
+<style scoped>
+.nav{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1100;
+}
+</style>

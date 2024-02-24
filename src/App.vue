@@ -14,6 +14,7 @@ body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  margin-top: 64px;
 }
 #app {
   min-height: 100vh;

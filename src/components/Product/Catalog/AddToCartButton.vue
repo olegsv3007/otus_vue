@@ -15,7 +15,3 @@ const cartService = new CartService();
 
 const addToCart = () => cartService.addProduct(props.product);
 </script>
-
-<style scoped>
-
-</style>
