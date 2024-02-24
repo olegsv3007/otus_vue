@@ -12,11 +12,7 @@
         <div class="col-12 text-lg text-900">{{ product.description }}</div>
         <div class="col-12 flex align-items-end justify-content-between">
           <div class="flex align-items-center">
-            <FormModalComponent form="../Order/Form/CreateOrderForm.vue" header="Create Order" :form-props="{product: product}" success-message="Order has been created">
-              <template #modal-initiator="{ showModal }">
-                <Button icon="pi pi-shopping-cart" @click.stop="showModal" value="Add to cart"></Button>
-              </template>
-            </FormModalComponent>
+            <AddToCartButton :product="product"/>
             <div class="ml-2 text-4xl font-semibold text-700">${{product.price}}</div>
           </div>
           <Rating :modelValue="product.rating.rate" readonly :cancel="false"></Rating>
@@ -28,9 +24,8 @@
 
 <script setup lang="ts">
 import Tag from "primevue/tag";
-import FormModalComponent from "../../common/FormModalComponent.vue";
-import Button from "primevue/button";
 import Rating from "primevue/rating";
+import AddToCartButton from "./AddToCartButton.vue";
 
 interface Props {
   product: Product,

@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import Rating from "primevue/rating";
-import Button from "primevue/button";
-import FormModalComponent from "../../common/FormModalComponent.vue";
-
-interface Props {
-  product: Product,
-}
-
-defineProps<Props>();
-</script>
 
 <template>
   <div class="p-4 border-1 surface-border surface-card border-round h-full flex flex-column justify-content-between">
@@ -25,11 +14,18 @@ defineProps<Props>();
     </div>
     <div class="flex align-items-center justify-content-between">
       <span class="text-2xl font-semibold">${{ product.price }}</span>
-      <FormModalComponent form="../Order/Form/CreateOrderForm.vue" header="Create Order" :form-props="{product: product}" success-message="Order has been created">
-        <template #modal-initiator="{ showModal }">
-          <Button icon="pi pi-shopping-cart" rounded @click.stop="showModal"></Button>
-        </template>
-      </FormModalComponent>
+      <AddToCartButton :product="product"/>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import Rating from "primevue/rating";
+import AddToCartButton from "./AddToCartButton.vue";
+
+interface Props {
+  product: Product,
+}
+
+defineProps<Props>();
+</script>

@@ -10,9 +10,7 @@
     </template>
     <template #end>
       <div class="flex">
-        <router-link v-slot="{ navigate }" :to="{name: 'cart'}" custom>
-          <Button @click="navigate" class="p-button p-button-sm text-xs" icon="pi pi-shopping-cart" rounded aria-label="Filter" badge="2"/>
-        </router-link>
+        <CartBadge />
         <router-link v-if="!currentUser" v-slot="{ navigate }" :to="{name: 'login'}" custom>
           <Button @click="navigate" class="p-button p-button-sm ml-2" label="Login" icon="pi pi-sign-in"/>
         </router-link>
@@ -30,6 +28,7 @@ import {LoginService} from "../../../services/LoginService.ts";
 import {onMounted, Ref, ref} from "vue";
 import {useRouter} from "vue-router";
 import Button from "primevue/button";
+import CartBadge from "../../Cart/CartBadge.vue";
 
 const loginService = new LoginService();
 const currentUser: Ref<string|null> = ref<string|null>(null);
